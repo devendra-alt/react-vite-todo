@@ -1,4 +1,4 @@
-import InputTodo from '@/components/TodoInput';
+import InputTodo from './TodoInput';
 import TodoList from './TodoList';
 
 const TodosLogic = () => {
