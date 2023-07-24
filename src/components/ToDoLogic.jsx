@@ -1,27 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import InputTodo from './TodoInput';
 import TodoList from './TodoList';
+import { v4 as uuidv4 } from 'uuid';
 
 const TodosLogic = () => {
-  const [todos, setToDos] = useState([
-    {
-      id: 1,
-      title: 'Setup development environment',
-      completed: true,
-    },
-    {
-      id: 2,
-      title: 'Develop website and add content',
-      completed: false,
-    },
-    {
-      id: 3,
-      title: 'Deploy to live server',
-      completed: false,
-    },
-  ]);
+  const [todos, setToDos] = useState(getInitialTodos());
 
-  const [title, setTitle] = useState('');
+  function getInitialTodos() {
+    const temp = localStorage.getItem('todos');
+    const savedTodos = JSON.parse(temp);
+    return savedTodos || [];
+  }
+
+  useEffect(() => {
+    const temp = JSON.stringify(todos);
+    localStorage.setItem('todos', temp);
+  }, [todos]);
+
+  const addTodoItem = (title) => {
+    const newTodo = {
+      id: uuidv4(),
+      title: title,
+      completed: false,
+    };
+    setToDos([...todos, newTodo]);
+  };
+
+  const setUpdate = (updatedTitle, id) => {
+    setToDos((pre) =>
+      pre.map((el) => (el.id === id ? { ...el, title: updatedTitle } : el))
+    );
+  };
+
+  function delTodo(id) {
+    setToDos([...todos.filter((todo) => todo.id !== id)]);
+  }
 
   function handleCheckbox(id) {
     setToDos((pre) =>
@@ -29,17 +42,14 @@ const TodosLogic = () => {
     );
   }
 
-  function delTodo(id) {
-    setToDos([...todos.filter((todo) => todo.id !== id)]);
-  }
-
   return (
     <div>
-      <InputTodo />
+      <InputTodo addTodoItem={addTodoItem} />
       <TodoList
         todos={todos}
         handleCheckbox={handleCheckbox}
         delTodo={delTodo}
+        setUpdate={setUpdate}
       />
     </div>
   );
