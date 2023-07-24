@@ -1,7 +1,7 @@
 import PropType from 'prop-types';
 import TodoItem from './TodoItem';
 
-const TodoList = ({ todos, handleCheckbox, delTodo }) => {
+const TodoList = ({ todos, handleCheckbox, delTodo, setUpdate }) => {
   return (
     <ul>
       {todos.map((todo) => {
@@ -11,6 +11,7 @@ const TodoList = ({ todos, handleCheckbox, delTodo }) => {
             todoTask={todo}
             handleCheckbox={handleCheckbox}
             delTodo={delTodo}
+            setUpdate={setUpdate}
           />
         );
       })}
