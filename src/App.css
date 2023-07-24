@@ -1,3 +1,43 @@
-ul {
+body {
+  background-color: red;
+}
+
+#root {
+  background-color: white;
+  min-height: 15rem;
+  max-width: 80vw;
+  margin: 5rem auto;
+  text-align: center;
+}
+
+header {
   font-size: 2rem;
+  padding: 3.2rem;
+}
+
+form {
+  padding: 0 5rem;
+}
+
+form > input {
+  padding: 0.5rem;
+  margin-right: 2rem;
+  width: 80%;
+  outline: none;
+  border: 0.2rem solid #000;
+  font-size: 1.5rem;
+}
+
+.todo-btn {
+  padding: 0.5rem 2rem;
+  background-color: #fff;
+  font-weight: 500;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.error-msg {
+  display: block;
+  font-size: 1.1rem;
+  color: #f85252;
 }
