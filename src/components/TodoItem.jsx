@@ -3,8 +3,8 @@ import { useState } from 'react';
 
 const TodoItem = ({ todoTask, handleCheckbox, delTodo, setUpdate }) => {
   const [editing, setEditing] = useState(false);
-  let vieWMode = {};
-  let editMode = {};
+  const vieWMode = {};
+  const editMode = {};
   if (editing) {
     vieWMode.display = 'none';
   } else {
@@ -27,8 +27,12 @@ const TodoItem = ({ todoTask, handleCheckbox, delTodo, setUpdate }) => {
           onChange={() => handleCheckbox(todoTask.id)}
         />
         {todoTask.title}
-        <button onClick={handleEditing}>Edit</button>
-        <button onClick={() => delTodo(todoTask.id)}>Delete</button>
+        <button onClick={handleEditing} type="submit">
+          Edit
+        </button>
+        <button onClick={() => delTodo(todoTask.id)} type="submit">
+          Delete
+        </button>
       </div>
       <input
         type="text"
@@ -42,4 +46,12 @@ const TodoItem = ({ todoTask, handleCheckbox, delTodo, setUpdate }) => {
     </li>
   );
 };
+
+TodoItem.propTypes = {
+  todoTask: PropTypes.shape().isRequired,
+  handleCheckbox: PropTypes.func.isRequired,
+  delTodo: PropTypes.func.isRequired,
+  setUpdate: PropTypes.func.isRequired,
+};
+
 export default TodoItem;
