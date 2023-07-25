@@ -1,22 +1,25 @@
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 
-const TodoList = (props) => {
-  const { todoList } = props;
-  return (
-    <ul>
-      {todoList.map((todo) => (
-        <TodoItem key={todo.id} todoTask={todo} />
-      ))}
-    </ul>
-  );
-};
+const TodoList = ({ todos, handleCheckbox, delTodo, setUpdate }) => (
+  <ul>
+    {todos.map((todo) => (
+      <TodoItem
+        key={todo.id}
+        todoTask={todo}
+        handleCheckbox={handleCheckbox}
+        delTodo={delTodo}
+        setUpdate={setUpdate}
+      />
+    ))}
+  </ul>
+);
 
 TodoList.propTypes = {
-  props: PropType.shape({
-    todoList: PropType.arrayOf(PropType.string),
-  }).isRequired,
-  todoList: PropType.arrayOf(PropType.string).isRequired,
+  todos: PropTypes.shape([]).isRequired,
+  handleCheckbox: PropTypes.func.isRequired,
+  delTodo: PropTypes.func.isRequired,
+  setUpdate: PropTypes.func.isRequired,
 };
 
 export default TodoList;
